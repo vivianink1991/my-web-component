@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>My Web Components</title>
+	<style>
+		button {
+			background: pink;
+		}
+		.dialog-para {
+			text-align: center;
+			font-size: 16px;
+		}
+	</style>
+</head>
+<body>
+	<my-button label="Open Dialog"></my-button>
+	<my-dialog dialogTitle="Welcome" visible="false">
+		<p class="dialog-para">Hello world!</p>
+	</my-dialog>
+	<my-dropdown></my-dropdown>
+
+	<script src="components/MyButton.js"></script>
+	<script src="components/MyDialog.js"></script>
+	<script src="components//MyDropdown.js"></script>
+	<script>
+		const myDialog = document.querySelector('my-dialog')
+		const myButton = document.querySelector('my-button')
+		const myDropdown = document.querySelector('my-dropdown')
+
+		myButton.addEventListener('clicked', (event) => {
+			console.log('event', event)
+			myDialog.visible = true
+		})
+
+		myDialog.addEventListener('confirm', () => {
+			console.log('Trigger Dialog Confirm')
+		})
+		myDialog.addEventListener('cancel', () => {
+			console.log('Trigger Dialog Cancel')
+		})
+		myDialog.addEventListener('close', () => {
+			myDialog.visible = false
+		})
+
+		myDropdown.data = [
+			{
+					label: '唱歌',
+					value: 'singing'
+			},
+			{
+					label: '游泳',
+					value: 'swimming'
+			}
+		]
+		// myDropdown.defaultValue = 'singing'
+		myDropdown.addEventListener('selected', e => {
+			console.log('selected item: ', e.detail.value)
+		})
+	</script>
+</body>
+</html>
